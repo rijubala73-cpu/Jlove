@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Do You Love Me? ❤️</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background Music -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="assets/love-music.mp3" type="audio/mpeg">
+    </audio>
+
+
+    <!-- Floating Hearts -->
+    <div id="hearts"></div>
+
+
+    <!-- ================= HOME PAGE ================= -->
+
+    <section id="homePage" class="page active">
+
+        <div class="glass-card">
+
+            <div class="main-heart">
+                ❤️
+            </div>
+
+            <p class="small-title">
+                A little question...
+            </p>
+
+            <h1>
+                Do you love me?
+            </h1>
+
+            <p class="subtitle">
+                Please choose carefully... 💕
+            </p>
+
+
+            <div class="buttons">
+
+                <button id="yesBtn" class="yes-btn">
+                    Yes ❤️
+                </button>
+
+                <button id="noBtn" class="no-btn">
+                    No 😢
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= CONGRATULATIONS ================= -->
+
+    <section id="congratsPage" class="page">
+
+        <div class="glass-card celebration">
+
+            <div class="celebration-heart">
+                💖
+            </div>
+
+            <div class="sparkles">
+                ✨ ✨ ✨
+            </div>
+
+            <h1>
+                Congratulations! 🎉
+            </h1>
+
+            <h2>
+                You are connected with Joy Bala
+            </h2>
+
+            <p>
+                Sometimes a single "Yes"<br>
+                can begin a beautiful story. ❤️
+            </p>
+
+            <button id="loveBtn" class="main-btn">
+                ❤️ Love
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= LOVE PAGE ================= -->
+
+    <section id="lovePage" class="page">
+
+        <div class="poem-card">
+
+            <div class="poem-heart">
+                💗
+            </div>
+
+            <p class="section-label">
+                A little something from the heart
+            </p>
+
+            <h1>
+                Love
+            </h1>
+
+
+            <div class="poem">
+
+                <p>
+                    তোমার হাসিতে যেন<br>
+                    সকালবেলার নরম রোদ,<br>
+                    তোমার কথায় মিশে থাকে<br>
+                    হাজারো সুন্দর অনুভূতি।
+                </p>
+
+                <p>
+                    তোমার চোখের নীরবতায়<br>
+                    কত গল্প যে লুকিয়ে থাকে,<br>
+                    কাছে না থেকেও তুমি<br>
+                    অদ্ভুতভাবে কাছে থাকো।
+                </p>
+
+                <p>
+                    সময় বদলাবে,<br>
+                    দিন বদলাবে,<br>
+                    কিন্তু কিছু অনুভূতি<br>
+                    থেকে যায় একই রকম।
+                </p>
+
+                <p>
+                    হয়তো এই গল্পের<br>
+                    কোনো নাম নেই,<br>
+                    তবুও হৃদয়ের পাতায়<br>
+                    তোমার নামটাই লেখা।
+                </p>
+
+            </div>
+
+
+            <div class="special-message">
+
+                <span>প্রিয় Nipa,</span>
+
+                <br>
+
+                আমি শুধু তোমাকেই ভালোবাসবো। ❤️
+
+            </div>
+
+
+            <button id="meetBtn" class="main-btn">
+
+                🌹 Let's Meet
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= DATE MODAL ================= -->
+
+    <div id="dateModal" class="modal">
+
+        <div class="modal-box">
+
+            <button id="closeModal" class="close-btn">
+                ×
+            </button>
+
+
+            <div class="modal-heart">
+                🌹
+            </div>
+
+            <h2>
+                Let's Meet
+            </h2>
+
+            <p class="modal-description">
+                Let's make a beautiful plan together ❤️
+            </p>
+
+
+            <form id="dateForm">
+
+                <div class="input-group">
+
+                    <label for="name">
+                        👤 Your Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="place">
+                        📍 Place
+                    </label>
+
+                    <input
+                        type="text"
+                        id="place"
+                        placeholder="Where should we meet?"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="flower">
+                        🌹 Flower
+                    </label>
+
+                    <input
+                        type="text"
+                        id="flower"
+                        placeholder="Which flower?"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="food">
+                        🍕 Food
+                    </label>
+
+                    <input
+                        type="text"
+                        id="food"
+                        placeholder="What should we eat?"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="date">
+                        📅 Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="date"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="book-btn"
+                    id="bookBtn"
+                >
+
+                    💌 Book Date With Your Love (Joy)
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= SUCCESS MESSAGE ================= -->
+
+    <div id="successMessage" class="success-message">
+
+        <div class="success-box">
+
+            <div class="success-icon">
+                💖
+            </div>
+
+            <h2>
+                Date Booked!
+            </h2>
+
+            <p>
+                Your information has been saved successfully.
+            </p>
+
+            <p>
+                The message has also been copied. ❤️
+            </p>
+
+            <button id="successClose" class="main-btn">
+                Okay ❤️
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- JavaScript -->
+    <script type="module" src="script.js"></script>
+
+</body>
+</html>
