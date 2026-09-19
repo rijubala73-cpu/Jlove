@@ -1,3 +1,15 @@
+const firebaseConfig = {
+    apiKey: "AIzaSyA9jASXFkIHzuDM3yXLM7nItVmlxAFQGWs",
+    authDomain: "jlove-88897.firebaseapp.com",
+    projectId: "jlove-88897",
+    storageBucket: "jlove-88897.firebasestorage.app",
+    messagingSenderId: "977214027902",
+    appId: "1:977214027902:web:9ea0d3a891d9db4da3002f",
+    measurementId: "G-H4MS9EJKVM"
+  };
+
+
+
 import {
     initializeApp
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
