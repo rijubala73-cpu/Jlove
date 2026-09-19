@@ -1,0 +1,1023 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+:root {
+    --pink: #ff4f91;
+    --light-pink: #ff8fba;
+    --dark: #170018;
+    --glass: rgba(255,255,255,0.10);
+}
+
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+
+body {
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    color: white;
+
+    overflow-x: hidden;
+
+    background:
+
+        linear-gradient(
+            rgba(24, 0, 27, 0.68),
+            rgba(24, 0, 27, 0.78)
+        ),
+
+        url("assets/background.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
+/* ================= PAGE ================= */
+
+.page {
+
+    width: 100%;
+    min-height: 100vh;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 25px;
+
+}
+
+
+.page.active {
+
+    display: flex;
+
+    animation:
+        pageEnter 0.8s ease forwards;
+
+}
+
+
+@keyframes pageEnter {
+
+    from {
+        opacity: 0;
+        transform: scale(0.94);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+
+/* ================= GLASS CARD ================= */
+
+.glass-card,
+.poem-card {
+
+    width: min(92%, 650px);
+
+    padding: 50px 35px;
+
+    text-align: center;
+
+    background:
+        rgba(255,255,255,0.11);
+
+    border:
+        1px solid rgba(255,255,255,0.22);
+
+    border-radius: 32px;
+
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
+
+    box-shadow:
+
+        0 30px 80px
+        rgba(0,0,0,0.45),
+
+        inset 0 0 30px
+        rgba(255,255,255,0.05);
+
+    animation:
+        cardFloat 5s ease-in-out infinite;
+
+}
+
+
+@keyframes cardFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+}
+
+
+/* ================= HEART ================= */
+
+.main-heart {
+
+    font-size: 85px;
+
+    animation:
+        heartbeat 1.3s infinite;
+
+    filter:
+        drop-shadow(
+            0 0 25px
+            rgba(255,70,140,0.8)
+        );
+
+}
+
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.18);
+    }
+
+}
+
+
+/* ================= TEXT ================= */
+
+.small-title {
+
+    margin-top: 10px;
+
+    font-size: 15px;
+
+    opacity: 0.7;
+
+    letter-spacing: 2px;
+
+}
+
+
+h1 {
+
+    margin:
+        12px 0;
+
+    font-size:
+        clamp(38px, 8vw, 65px);
+
+    line-height: 1.1;
+
+}
+
+
+.subtitle {
+
+    opacity: 0.8;
+
+    margin-top: 12px;
+
+}
+
+
+/* ================= BUTTONS ================= */
+
+.buttons {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 18px;
+
+    margin-top: 35px;
+
+}
+
+
+button {
+
+    font-family: inherit;
+
+    border: none;
+
+    cursor: pointer;
+
+}
+
+
+.yes-btn,
+.no-btn {
+
+    padding:
+        15px 32px;
+
+    border-radius:
+        50px;
+
+    font-size:
+        17px;
+
+    font-weight:
+        700;
+
+}
+
+
+.yes-btn {
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff367f,
+            #ff77a9
+        );
+
+    box-shadow:
+        0 8px 30px
+        rgba(255,54,127,0.4);
+
+    transition:
+        0.3s;
+
+}
+
+
+.yes-btn:hover {
+
+    transform:
+        scale(1.08);
+
+}
+
+
+.no-btn {
+
+    color: #333;
+
+    background:
+        white;
+
+    position: relative;
+
+    transition:
+        transform 0.25s;
+
+}
+
+
+/* ================= MAIN BUTTON ================= */
+
+.main-btn {
+
+    margin-top: 28px;
+
+    padding:
+        15px 32px;
+
+    border-radius:
+        50px;
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff3d84,
+            #ff79ad
+        );
+
+    box-shadow:
+        0 10px 35px
+        rgba(255,61,132,0.4);
+
+    transition:
+        0.3s;
+
+}
+
+
+.main-btn:hover {
+
+    transform:
+        translateY(-3px)
+        scale(1.04);
+
+}
+
+
+/* ================= CONGRATULATIONS ================= */
+
+.celebration-heart {
+
+    font-size: 100px;
+
+    animation:
+        heartbeat 1.2s infinite;
+
+}
+
+
+.sparkles {
+
+    margin-top:
+        -20px;
+
+    font-size:
+        25px;
+
+    animation:
+        sparkle 2s infinite;
+
+}
+
+
+@keyframes sparkle {
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+}
+
+
+.celebration h2 {
+
+    font-size:
+        clamp(21px, 5vw, 32px);
+
+    margin:
+        20px 0;
+
+}
+
+
+.celebration p {
+
+    line-height:
+        1.8;
+
+    opacity:
+        0.85;
+
+}
+
+
+/* ================= POEM ================= */
+
+.poem-card {
+
+    max-width:
+        700px;
+
+}
+
+
+.poem-heart {
+
+    font-size:
+        70px;
+
+    animation:
+        heartbeat 1.5s infinite;
+
+}
+
+
+.section-label {
+
+    opacity:
+        0.65;
+
+    margin-top:
+        10px;
+
+}
+
+
+.poem-card h1 {
+
+    margin-bottom:
+        30px;
+
+}
+
+
+.poem {
+
+    font-size:
+        17px;
+
+    line-height:
+        2;
+
+    color:
+        #ffeaf3;
+
+}
+
+
+.poem p {
+
+    margin-bottom:
+        22px;
+
+}
+
+
+.special-message {
+
+    margin-top:
+        30px;
+
+    padding:
+        22px;
+
+    border-radius:
+        20px;
+
+    background:
+        rgba(255,255,255,0.10);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.12);
+
+    font-size:
+        20px;
+
+    line-height:
+        1.8;
+
+}
+
+
+/* ================= MODAL ================= */
+
+.modal {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    display:
+        none;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    padding:
+        20px;
+
+    z-index:
+        1000;
+
+    background:
+        rgba(0,0,0,0.72);
+
+    backdrop-filter:
+        blur(10px);
+
+}
+
+
+.modal.show {
+
+    display:
+        flex;
+
+    animation:
+        fadeIn 0.35s ease;
+
+}
+
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+
+.modal-box {
+
+    position:
+        relative;
+
+    width:
+        min(95%, 520px);
+
+    max-height:
+        92vh;
+
+    overflow-y:
+        auto;
+
+    padding:
+        35px 28px;
+
+    border-radius:
+        28px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(75,7,61,0.98),
+            rgba(22,0,31,0.98)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,0.2);
+
+    box-shadow:
+        0 30px 90px
+        rgba(0,0,0,0.7);
+
+    animation:
+        modalIn 0.45s ease;
+
+}
+
+
+@keyframes modalIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(30px)
+            scale(0.85);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+.close-btn {
+
+    position:
+        absolute;
+
+    right:
+        15px;
+
+    top:
+        15px;
+
+    width:
+        38px;
+
+    height:
+        38px;
+
+    border-radius:
+        50%;
+
+    color:
+        white;
+
+    font-size:
+        25px;
+
+    background:
+        rgba(255,255,255,0.12);
+
+}
+
+
+.modal-heart {
+
+    text-align:
+        center;
+
+    font-size:
+        55px;
+
+}
+
+
+.modal-box h2 {
+
+    text-align:
+        center;
+
+    font-size:
+        34px;
+
+}
+
+
+.modal-description {
+
+    text-align:
+        center;
+
+    opacity:
+        0.75;
+
+    margin:
+        10px 0 25px;
+
+}
+
+
+/* ================= FORM ================= */
+
+.input-group {
+
+    margin-bottom:
+        17px;
+
+}
+
+
+.input-group label {
+
+    display:
+        block;
+
+    margin-bottom:
+        7px;
+
+    font-size:
+        15px;
+
+}
+
+
+.input-group input {
+
+    width:
+        100%;
+
+    padding:
+        14px 15px;
+
+    border-radius:
+        12px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.18);
+
+    outline:
+        none;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    color:
+        white;
+
+    font-size:
+        16px;
+
+}
+
+
+.input-group input::placeholder {
+
+    color:
+        rgba(255,255,255,0.5);
+
+}
+
+
+.input-group input:focus {
+
+    border-color:
+        var(--pink);
+
+    box-shadow:
+        0 0 15px
+        rgba(255,79,145,0.25);
+
+}
+
+
+.book-btn {
+
+    width:
+        100%;
+
+    padding:
+        16px;
+
+    margin-top:
+        10px;
+
+    border-radius:
+        50px;
+
+    color:
+        white;
+
+    font-size:
+        16px;
+
+    font-weight:
+        700;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff3b83,
+            #ff78aa
+        );
+
+}
+
+
+.book-btn:disabled {
+
+    opacity:
+        0.6;
+
+    cursor:
+        wait;
+
+}
+
+
+/* ================= SUCCESS ================= */
+
+.success-message {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    display:
+        none;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    padding:
+        20px;
+
+    z-index:
+        2000;
+
+    background:
+        rgba(0,0,0,0.75);
+
+    backdrop-filter:
+        blur(8px);
+
+}
+
+
+.success-message.show {
+
+    display:
+        flex;
+
+}
+
+
+.success-box {
+
+    width:
+        min(92%, 430px);
+
+    text-align:
+        center;
+
+    padding:
+        40px 25px;
+
+    border-radius:
+        28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #4b073d,
+            #170018
+        );
+
+    animation:
+        modalIn .45s ease;
+
+}
+
+
+.success-icon {
+
+    font-size:
+        75px;
+
+    animation:
+        heartbeat 1.2s infinite;
+
+}
+
+
+.success-box h2 {
+
+    margin:
+        15px 0;
+
+}
+
+
+/* ================= FLOATING HEARTS ================= */
+
+#hearts span {
+
+    position:
+        fixed;
+
+    bottom:
+        -40px;
+
+    pointer-events:
+        none;
+
+    z-index:
+        1;
+
+    animation:
+        floatHeart linear forwards;
+
+}
+
+
+@keyframes floatHeart {
+
+    0% {
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity:
+            0;
+
+    }
+
+    15% {
+        opacity:
+            0.8;
+    }
+
+    100% {
+
+        transform:
+            translateY(-115vh)
+            rotate(360deg);
+
+        opacity:
+            0;
+
+    }
+
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 600px) {
+
+    .page {
+
+        padding:
+            15px;
+
+    }
+
+
+    .glass-card,
+    .poem-card {
+
+        padding:
+            35px 20px;
+
+        border-radius:
+            25px;
+
+    }
+
+
+    .main-heart {
+
+        font-size:
+            70px;
+
+    }
+
+
+    h1 {
+
+        font-size:
+            40px;
+
+    }
+
+
+    .buttons {
+
+        gap:
+            10px;
+
+    }
+
+
+    .yes-btn,
+    .no-btn {
+
+        padding:
+            13px 25px;
+
+    }
+
+
+    .poem {
+
+        font-size:
+            16px;
+
+    }
+
+
+    .modal-box {
+
+        padding:
+            30px 20px;
+
+    }
+
+}

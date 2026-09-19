@@ -1,0 +1,647 @@
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+
+// =====================================================
+// FIREBASE CONFIG
+// নিজের Firebase project-এর config এখানে বসাবে
+// =====================================================
+
+const firebaseConfig = {
+
+    apiKey: "YOUR_API_KEY",
+
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+
+    projectId: "YOUR_PROJECT_ID",
+
+    storageBucket: "YOUR_PROJECT.firebasestorage.app",
+
+    messagingSenderId: "YOUR_SENDER_ID",
+
+    appId: "YOUR_APP_ID"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+// =====================================================
+// PAGE ELEMENTS
+// =====================================================
+
+const homePage =
+    document.getElementById("homePage");
+
+const congratsPage =
+    document.getElementById("congratsPage");
+
+const lovePage =
+    document.getElementById("lovePage");
+
+
+const yesBtn =
+    document.getElementById("yesBtn");
+
+const noBtn =
+    document.getElementById("noBtn");
+
+
+const loveBtn =
+    document.getElementById("loveBtn");
+
+const meetBtn =
+    document.getElementById("meetBtn");
+
+
+const dateModal =
+    document.getElementById("dateModal");
+
+const closeModal =
+    document.getElementById("closeModal");
+
+
+const dateForm =
+    document.getElementById("dateForm");
+
+
+const bgMusic =
+    document.getElementById("bgMusic");
+
+
+const successMessage =
+    document.getElementById("successMessage");
+
+const successClose =
+    document.getElementById("successClose");
+
+
+// =====================================================
+// NO BUTTON
+// =====================================================
+
+function moveNoButton() {
+
+    const width =
+        noBtn.offsetWidth;
+
+    const height =
+        noBtn.offsetHeight;
+
+
+    const maxX =
+        window.innerWidth - width - 15;
+
+    const maxY =
+        window.innerHeight - height - 15;
+
+
+    const x =
+        Math.random() * Math.max(maxX, 10);
+
+    const y =
+        Math.random() * Math.max(maxY, 10);
+
+
+    noBtn.style.position =
+        "fixed";
+
+    noBtn.style.left =
+        `${x}px`;
+
+    noBtn.style.top =
+        `${y}px`;
+
+    noBtn.style.zIndex =
+        "9999";
+
+
+    noBtn.animate(
+
+        [
+            {
+                transform:
+                    "scale(.6) rotate(-15deg)"
+            },
+
+            {
+                transform:
+                    "scale(1.15) rotate(10deg)"
+            },
+
+            {
+                transform:
+                    "scale(1) rotate(0)"
+            }
+        ],
+
+        {
+            duration:
+                350,
+
+            easing:
+                "ease-out"
+        }
+
+    );
+
+}
+
+
+// Desktop
+
+noBtn.addEventListener(
+    "mouseenter",
+    moveNoButton
+);
+
+
+// Mobile
+
+noBtn.addEventListener(
+    "touchstart",
+    function (event) {
+
+        event.preventDefault();
+
+        moveNoButton();
+
+    },
+    {
+        passive: false
+    }
+);
+
+
+// Click
+
+noBtn.addEventListener(
+    "click",
+    function (event) {
+
+        event.preventDefault();
+
+        moveNoButton();
+
+    }
+);
+
+
+// =====================================================
+// YES BUTTON
+// MUSIC + NEXT PAGE
+// =====================================================
+
+yesBtn.addEventListener(
+    "click",
+    async function () {
+
+        // Start music
+        try {
+
+            bgMusic.volume =
+                0.35;
+
+            await bgMusic.play();
+
+        } catch (error) {
+
+            console.log(
+                "Music could not start:",
+                error
+            );
+
+        }
+
+
+        // Change page
+
+        homePage.classList.remove(
+            "active"
+        );
+
+
+        setTimeout(
+            function () {
+
+                congratsPage.classList.add(
+                    "active"
+                );
+
+                createHeartBurst();
+
+            },
+            250
+        );
+
+    }
+);
+
+
+// =====================================================
+// LOVE BUTTON
+// =====================================================
+
+loveBtn.addEventListener(
+    "click",
+    function () {
+
+        congratsPage.classList.remove(
+            "active"
+        );
+
+
+        setTimeout(
+            function () {
+
+                lovePage.classList.add(
+                    "active"
+                );
+
+            },
+            250
+        );
+
+    }
+);
+
+
+// =====================================================
+// OPEN DATE MODAL
+// =====================================================
+
+meetBtn.addEventListener(
+    "click",
+    function () {
+
+        dateModal.classList.add(
+            "show"
+        );
+
+    }
+);
+
+
+// =====================================================
+// CLOSE MODAL
+// =====================================================
+
+closeModal.addEventListener(
+    "click",
+    function () {
+
+        dateModal.classList.remove(
+            "show"
+        );
+
+    }
+);
+
+
+// Click outside
+
+dateModal.addEventListener(
+    "click",
+    function (event) {
+
+        if (
+            event.target === dateModal
+        ) {
+
+            dateModal.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+// =====================================================
+// BOOK DATE
+// =====================================================
+
+dateForm.addEventListener(
+    "submit",
+    async function (event) {
+
+        event.preventDefault();
+
+
+        const bookBtn =
+            document.getElementById(
+                "bookBtn"
+            );
+
+
+        // Get values
+
+        const name =
+            document
+                .getElementById("name")
+                .value
+                .trim();
+
+
+        const place =
+            document
+                .getElementById("place")
+                .value
+                .trim();
+
+
+        const flower =
+            document
+                .getElementById("flower")
+                .value
+                .trim();
+
+
+        const food =
+            document
+                .getElementById("food")
+                .value
+                .trim();
+
+
+        const date =
+            document
+                .getElementById("date")
+                .value;
+
+
+        // Message
+
+        const message =
+
+`💌 NEW DATE REQUEST
+
+👤 Name: ${name}
+
+📍 Place: ${place}
+
+🌹 Flower: ${flower}
+
+🍕 Food: ${food}
+
+📅 Date: ${date}
+
+❤️ Booked with: Joy Bala`;
+
+
+        // Disable button
+
+        bookBtn.disabled =
+            true;
+
+        bookBtn.textContent =
+            "Saving... ❤️";
+
+
+        try {
+
+            // =================================================
+            // SAVE TO FIREBASE
+            // =================================================
+
+            await addDoc(
+                collection(
+                    db,
+                    "dateBookings"
+                ),
+                {
+
+                    name:
+                        name,
+
+                    place:
+                        place,
+
+                    flower:
+                        flower,
+
+                    food:
+                        food,
+
+                    date:
+                        date,
+
+                    message:
+                        message,
+
+                    createdAt:
+                        serverTimestamp(),
+
+                    status:
+                        "new"
+
+                }
+            );
+
+
+            // =================================================
+            // COPY MESSAGE
+            // =================================================
+
+            try {
+
+                await navigator.clipboard.writeText(
+                    message
+                );
+
+            } catch (copyError) {
+
+                console.log(
+                    "Clipboard error:",
+                    copyError
+                );
+
+            }
+
+
+            // =================================================
+            // CLOSE MODAL
+            // =================================================
+
+            dateModal.classList.remove(
+                "show"
+            );
+
+
+            // =================================================
+            // SHOW SUCCESS
+            // =================================================
+
+            successMessage.classList.add(
+                "show"
+            );
+
+
+            // =================================================
+            // OPEN FACEBOOK
+            // =================================================
+
+            setTimeout(
+                function () {
+
+                    window.open(
+                        "https://www.facebook.com/joy.bala.581",
+                        "_blank"
+                    );
+
+                },
+                900
+            );
+
+
+            // Reset
+
+            dateForm.reset();
+
+
+        } catch (error) {
+
+            console.error(
+                "Firebase Error:",
+                error
+            );
+
+
+            alert(
+                "Booking save হয়নি। Firebase configuration এবং internet connection check করো।"
+            );
+
+        }
+
+
+        bookBtn.disabled =
+            false;
+
+        bookBtn.textContent =
+            "💌 Book Date With Your Love (Joy)";
+
+    }
+);
+
+
+// =====================================================
+// SUCCESS CLOSE
+// =====================================================
+
+successClose.addEventListener(
+    "click",
+    function () {
+
+        successMessage.classList.remove(
+            "show"
+        );
+
+    }
+);
+
+
+// =====================================================
+// FLOATING HEARTS
+// =====================================================
+
+function createHeart() {
+
+    const heart =
+        document.createElement(
+            "span"
+        );
+
+
+    const icons = [
+        "❤️",
+        "💗",
+        "💖",
+        "💕",
+        "💘"
+    ];
+
+
+    heart.textContent =
+        icons[
+            Math.floor(
+                Math.random() *
+                icons.length
+            )
+        ];
+
+
+    heart.style.left =
+        Math.random() *
+        100 +
+        "vw";
+
+
+    heart.style.fontSize =
+        12 +
+        Math.random() *
+        25 +
+        "px";
+
+
+    heart.style.animationDuration =
+        5 +
+        Math.random() *
+        7 +
+        "s";
+
+
+    document
+        .getElementById("hearts")
+        .appendChild(heart);
+
+
+    setTimeout(
+        function () {
+
+            heart.remove();
+
+        },
+        13000
+    );
+
+}
+
+
+setInterval(
+    createHeart,
+    600
+);
+
+
+// =====================================================
+// HEART BURST
+// =====================================================
+
+function createHeartBurst() {
+
+    for (
+        let i = 0;
+        i < 30;
+        i++
+    ) {
+
+        setTimeout(
+            createHeart,
+            i * 60
+        );
+
+    }
+
+}
