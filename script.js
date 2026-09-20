@@ -1,6 +1,4 @@
-import {
-    initializeApp
-} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 
 import {
     getFirestore,
@@ -10,384 +8,210 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
 
-// =====================================================
+// ===============================
 // FIREBASE CONFIG
-// নিজের Firebase project-এর config এখানে বসাবে
-// =====================================================
+// ===============================
 
 const firebaseConfig = {
-    
-  apiKey: "AIzaSyA9jASXFkIHzuDM3yXLM7nItVmlxAFQGWs",
-    
-  authDomain: "jlove-88897.firebaseapp.com",
-    
-  projectId: "jlove-88897",
-    
-  storageBucket: "jlove-88897.firebasestorage.app",
-    
-  messagingSenderId: "977214027902",
-    
-  appId: "1:977214027902:web:9ea0d3a891d9db4da3002f",
-    
-  measurementId: "G-H4MS9EJKVM"
+    apiKey: "AIzaSyA9jASXFkIHzuDM3yXLM7nItVmlxAFQGWs",
+    authDomain: "jlove-88897.firebaseapp.com",
+    projectId: "jlove-88897",
+    storageBucket: "jlove-88897.firebasestorage.app",
+    messagingSenderId: "977214027902",
+    appId: "1:977214027902:web:9ea0d3a891d9db4da3002f",
+    measurementId: "G-H4MS9EJKVM"
 };
 
-
 const app = initializeApp(firebaseConfig);
-
 const db = getFirestore(app);
 
 
-// =====================================================
-// PAGE ELEMENTS
-// =====================================================
+// ===============================
+// ELEMENTS
+// ===============================
 
-const homePage =
-    document.getElementById("homePage");
+const homePage = document.getElementById("homePage");
+const congratsPage = document.getElementById("congratsPage");
+const lovePage = document.getElementById("lovePage");
 
-const congratsPage =
-    document.getElementById("congratsPage");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
 
-const lovePage =
-    document.getElementById("lovePage");
+const loveBtn = document.getElementById("loveBtn");
+const meetBtn = document.getElementById("meetBtn");
 
+const dateModal = document.getElementById("dateModal");
+const closeModal = document.getElementById("closeModal");
 
-const yesBtn =
-    document.getElementById("yesBtn");
+const dateForm = document.getElementById("dateForm");
 
-const noBtn =
-    document.getElementById("noBtn");
+const bgMusic = document.getElementById("bgMusic");
 
-
-const loveBtn =
-    document.getElementById("loveBtn");
-
-const meetBtn =
-    document.getElementById("meetBtn");
+const successMessage = document.getElementById("successMessage");
+const successClose = document.getElementById("successClose");
 
 
-const dateModal =
-    document.getElementById("dateModal");
-
-const closeModal =
-    document.getElementById("closeModal");
-
-
-const dateForm =
-    document.getElementById("dateForm");
-
-
-const bgMusic =
-    document.getElementById("bgMusic");
-
-
-const successMessage =
-    document.getElementById("successMessage");
-
-const successClose =
-    document.getElementById("successClose");
-
-
-// =====================================================
+// ===============================
 // NO BUTTON
-// =====================================================
+// ===============================
 
 function moveNoButton() {
 
-    const width =
-        noBtn.offsetWidth;
+    const width = noBtn.offsetWidth;
+    const height = noBtn.offsetHeight;
 
-    const height =
-        noBtn.offsetHeight;
+    const maxX = window.innerWidth - width - 15;
+    const maxY = window.innerHeight - height - 15;
 
+    const x = Math.random() * Math.max(maxX, 10);
+    const y = Math.random() * Math.max(maxY, 10);
 
-    const maxX =
-        window.innerWidth - width - 15;
-
-    const maxY =
-        window.innerHeight - height - 15;
-
-
-    const x =
-        Math.random() * Math.max(maxX, 10);
-
-    const y =
-        Math.random() * Math.max(maxY, 10);
-
-
-    noBtn.style.position =
-        "fixed";
-
-    noBtn.style.left =
-        `${x}px`;
-
-    noBtn.style.top =
-        `${y}px`;
-
-    noBtn.style.zIndex =
-        "9999";
-
+    noBtn.style.position = "fixed";
+    noBtn.style.left = `${x}px`;
+    noBtn.style.top = `${y}px`;
+    noBtn.style.zIndex = "9999";
 
     noBtn.animate(
-
         [
             {
-                transform:
-                    "scale(.6) rotate(-15deg)"
+                transform: "scale(.6) rotate(-15deg)"
             },
-
             {
-                transform:
-                    "scale(1.15) rotate(10deg)"
+                transform: "scale(1.15) rotate(10deg)"
             },
-
             {
-                transform:
-                    "scale(1) rotate(0)"
+                transform: "scale(1) rotate(0)"
             }
         ],
-
         {
-            duration:
-                350,
-
-            easing:
-                "ease-out"
+            duration: 350,
+            easing: "ease-out"
         }
-
     );
-
 }
 
-
-// Desktop
-
-noBtn.addEventListener(
-    "mouseenter",
-    moveNoButton
-);
-
-
-// Mobile
+noBtn.addEventListener("mouseenter", moveNoButton);
 
 noBtn.addEventListener(
     "touchstart",
     function (event) {
-
         event.preventDefault();
-
         moveNoButton();
-
     },
     {
         passive: false
     }
 );
 
-
-// Click
-
 noBtn.addEventListener(
     "click",
     function (event) {
-
         event.preventDefault();
-
         moveNoButton();
-
     }
 );
 
 
-// =====================================================
+// ===============================
 // YES BUTTON
-// MUSIC + NEXT PAGE
-// =====================================================
+// ===============================
 
-yesBtn.addEventListener(
-    "click",
-    async function () {
+yesBtn.addEventListener("click", async function () {
 
-        // Start music
-        try {
-
-            bgMusic.volume =
-                0.35;
-
-            await bgMusic.play();
-
-        } catch (error) {
-
-            console.log(
-                "Music could not start:",
-                error
-            );
-
-        }
-
-
-        // Change page
-
-        homePage.classList.remove(
-            "active"
-        );
-
-
-        setTimeout(
-            function () {
-
-                congratsPage.classList.add(
-                    "active"
-                );
-
-                createHeartBurst();
-
-            },
-            250
-        );
-
+    try {
+        bgMusic.volume = 0.35;
+        await bgMusic.play();
+    } catch (error) {
+        console.log("Music error:", error);
     }
-);
+
+    homePage.classList.remove("active");
+
+    setTimeout(function () {
+
+        congratsPage.classList.add("active");
+
+        createHeartBurst();
+
+    }, 250);
+
+});
 
 
-// =====================================================
+// ===============================
 // LOVE BUTTON
-// =====================================================
+// ===============================
 
-loveBtn.addEventListener(
-    "click",
-    function () {
+loveBtn.addEventListener("click", function () {
 
-        congratsPage.classList.remove(
-            "active"
-        );
+    congratsPage.classList.remove("active");
 
+    setTimeout(function () {
 
-        setTimeout(
-            function () {
+        lovePage.classList.add("active");
 
-                lovePage.classList.add(
-                    "active"
-                );
+    }, 250);
 
-            },
-            250
-        );
-
-    }
-);
+});
 
 
-// =====================================================
-// OPEN DATE MODAL
-// =====================================================
+// ===============================
+// OPEN MODAL
+// ===============================
 
-meetBtn.addEventListener(
-    "click",
-    function () {
+meetBtn.addEventListener("click", function () {
 
-        dateModal.classList.add(
-            "show"
-        );
+    dateModal.classList.add("show");
 
-    }
-);
+});
 
 
-// =====================================================
+// ===============================
 // CLOSE MODAL
-// =====================================================
+// ===============================
 
-closeModal.addEventListener(
-    "click",
-    function () {
+closeModal.addEventListener("click", function () {
 
-        dateModal.classList.remove(
-            "show"
-        );
+    dateModal.classList.remove("show");
 
-    }
-);
+});
 
+dateModal.addEventListener("click", function (event) {
 
-// Click outside
+    if (event.target === dateModal) {
 
-dateModal.addEventListener(
-    "click",
-    function (event) {
-
-        if (
-            event.target === dateModal
-        ) {
-
-            dateModal.classList.remove(
-                "show"
-            );
-
-        }
+        dateModal.classList.remove("show");
 
     }
-);
+
+});
 
 
-// =====================================================
-// BOOK DATE
-// =====================================================
+// ======================================================
+// BOOK DATE → FIREBASE
+// ======================================================
 
-dateForm.addEventListener(
-    "submit",
-    async function (event) {
+dateForm.addEventListener("submit", async function (event) {
 
-        event.preventDefault();
+    event.preventDefault();
 
+    const bookBtn = document.getElementById("bookBtn");
 
-        const bookBtn =
-            document.getElementById(
-                "bookBtn"
-            );
+    const name = document.getElementById("name").value.trim();
+    const place = document.getElementById("place").value.trim();
+    const flower = document.getElementById("flower").value.trim();
+    const food = document.getElementById("food").value.trim();
+    const date = document.getElementById("date").value;
 
+    if (!name || !place || !flower || !food || !date) {
 
-        // Get values
+        alert("সবগুলো তথ্য পূরণ করো ❤️");
+        return;
 
-        const name =
-            document
-                .getElementById("name")
-                .value
-                .trim();
+    }
 
 
-        const place =
-            document
-                .getElementById("place")
-                .value
-                .trim();
-
-
-        const flower =
-            document
-                .getElementById("flower")
-                .value
-                .trim();
-
-
-        const food =
-            document
-                .getElementById("food")
-                .value
-                .trim();
-
-
-        const date =
-            document
-                .getElementById("date")
-                .value;
-
-
-        // Message
-
-        const message =
-
-`💌 NEW DATE REQUEST
+    const message = `💌 NEW DATE REQUEST
 
 👤 Name: ${name}
 
@@ -402,168 +226,127 @@ dateForm.addEventListener(
 ❤️ Booked with: Joy Bala`;
 
 
-        // Disable button
+    bookBtn.disabled = true;
+    bookBtn.textContent = "Saving... ❤️";
 
-        bookBtn.disabled =
-            true;
 
-        bookBtn.textContent =
-            "Saving... ❤️";
+    try {
 
+        console.log("Firebase save শুরু...");
+
+
+        // ===============================
+        // SAVE TO FIREBASE
+        // ===============================
+
+        const docRef = await addDoc(
+            collection(db, "dateBookings"),
+            {
+                name: name,
+                place: place,
+                flower: flower,
+                food: food,
+                date: date,
+                message: message,
+                createdAt: serverTimestamp(),
+                status: "new"
+            }
+        );
+
+
+        console.log("Firebase SUCCESS!");
+        console.log("Document ID:", docRef.id);
+
+
+        // ===============================
+        // COPY MESSAGE
+        // ===============================
 
         try {
 
-            // =================================================
-            // SAVE TO FIREBASE
-            // =================================================
+            await navigator.clipboard.writeText(message);
 
-            await addDoc(
-                collection(
-                    db,
-                    "dateBookings"
-                ),
-                {
+            console.log("Message copied!");
 
-                    name:
-                        name,
+        } catch (copyError) {
 
-                    place:
-                        place,
-
-                    flower:
-                        flower,
-
-                    food:
-                        food,
-
-                    date:
-                        date,
-
-                    message:
-                        message,
-
-                    createdAt:
-                        serverTimestamp(),
-
-                    status:
-                        "new"
-
-                }
-            );
-
-
-            // =================================================
-            // COPY MESSAGE
-            // =================================================
-
-            try {
-
-                await navigator.clipboard.writeText(
-                    message
-                );
-
-            } catch (copyError) {
-
-                console.log(
-                    "Clipboard error:",
-                    copyError
-                );
-
-            }
-
-
-            // =================================================
-            // CLOSE MODAL
-            // =================================================
-
-            dateModal.classList.remove(
-                "show"
-            );
-
-
-            // =================================================
-            // SHOW SUCCESS
-            // =================================================
-
-            successMessage.classList.add(
-                "show"
-            );
-
-
-            // =================================================
-            // OPEN FACEBOOK
-            // =================================================
-
-            setTimeout(
-                function () {
-
-                    window.open(
-                        "https://www.facebook.com/joy.bala.581",
-                        "_blank"
-                    );
-
-                },
-                900
-            );
-
-
-            // Reset
-
-            dateForm.reset();
-
-
-        } catch (error) {
-
-            console.error(
-                "Firebase Error:",
-                error
-            );
-
-
-            alert(
-                "Booking save হয়নি। Firebase configuration এবং internet connection check করো।"
-            );
+            console.log("Clipboard failed:", copyError);
 
         }
 
 
-        bookBtn.disabled =
-            false;
+        // ===============================
+        // CLOSE MODAL
+        // ===============================
 
-        bookBtn.textContent =
-            "💌 Book Date With Your Love (Joy)";
-
-    }
-);
+        dateModal.classList.remove("show");
 
 
-// =====================================================
-// SUCCESS CLOSE
-// =====================================================
+        // ===============================
+        // SUCCESS MESSAGE
+        // ===============================
 
-successClose.addEventListener(
-    "click",
-    function () {
+        successMessage.classList.add("show");
 
-        successMessage.classList.remove(
-            "show"
+
+        // ===============================
+        // OPEN FACEBOOK
+        // ===============================
+
+        setTimeout(function () {
+
+            window.open(
+                "https://www.facebook.com/joy.bala.581",
+                "_blank"
+            );
+
+        }, 1000);
+
+
+        // ===============================
+        // RESET FORM
+        // ===============================
+
+        dateForm.reset();
+
+
+    } catch (error) {
+
+        console.error("FIREBASE ERROR:", error);
+
+        alert(
+            "Firebase-এ data save হয়নি। Browser Console খুলে FIREBASE ERROR দেখো।"
         );
 
     }
-);
 
 
-// =====================================================
+    bookBtn.disabled = false;
+
+    bookBtn.textContent =
+        "💌 Book Date With Your Love (Joy)";
+
+});
+
+
+// ===============================
+// SUCCESS CLOSE
+// ===============================
+
+successClose.addEventListener("click", function () {
+
+    successMessage.classList.remove("show");
+
+});
+
+
+// ===============================
 // FLOATING HEARTS
-// =====================================================
+// ===============================
 
 function createHeart() {
 
-    const heart =
-        document.createElement(
-            "span"
-        );
-
+    const heart = document.createElement("span");
 
     const icons = [
         "❤️",
@@ -573,70 +356,40 @@ function createHeart() {
         "💘"
     ];
 
-
     heart.textContent =
-        icons[
-            Math.floor(
-                Math.random() *
-                icons.length
-            )
-        ];
-
+        icons[Math.floor(Math.random() * icons.length)];
 
     heart.style.left =
-        Math.random() *
-        100 +
-        "vw";
-
+        Math.random() * 100 + "vw";
 
     heart.style.fontSize =
-        12 +
-        Math.random() *
-        25 +
-        "px";
-
+        12 + Math.random() * 25 + "px";
 
     heart.style.animationDuration =
-        5 +
-        Math.random() *
-        7 +
-        "s";
-
+        5 + Math.random() * 7 + "s";
 
     document
         .getElementById("hearts")
         .appendChild(heart);
 
+    setTimeout(function () {
 
-    setTimeout(
-        function () {
+        heart.remove();
 
-            heart.remove();
-
-        },
-        13000
-    );
+    }, 13000);
 
 }
 
-
-setInterval(
-    createHeart,
-    600
-);
+setInterval(createHeart, 600);
 
 
-// =====================================================
+// ===============================
 // HEART BURST
-// =====================================================
+// ===============================
 
 function createHeartBurst() {
 
-    for (
-        let i = 0;
-        i < 30;
-        i++
-    ) {
+    for (let i = 0; i < 30; i++) {
 
         setTimeout(
             createHeart,
