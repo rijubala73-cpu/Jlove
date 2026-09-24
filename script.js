@@ -223,7 +223,7 @@ dateForm.addEventListener("submit", async function (event) {
 
 📅 Date: ${date}
 
-❤️ Booked with: Joy Bala`;
+❤️ Booked with: U.b. Riju`;
 
 
     bookBtn.disabled = true;
@@ -296,7 +296,7 @@ dateForm.addEventListener("submit", async function (event) {
         setTimeout(function () {
 
             window.open(
-                "https://www.facebook.com/joy.bala.581",
+                "https://https://www.facebook.com/",
                 "_blank"
             );
 
@@ -324,7 +324,7 @@ dateForm.addEventListener("submit", async function (event) {
     bookBtn.disabled = false;
 
     bookBtn.textContent =
-        "💌 Book Date With Your Love (Joy)";
+        "💌 Book Date With Your Love (Riju)";
 
 });
 
