@@ -295,10 +295,7 @@ dateForm.addEventListener("submit", async function (event) {
 
         setTimeout(function () {
 
-            window.open(
-    "https://www.facebook.com/riju.bala.702468",
-    "_blank"
-        );
+       window.open("https://www.facebook.com/riju.bala.702468", "_blank");
 
         }, 1000);
 
