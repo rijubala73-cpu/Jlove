@@ -37,8 +37,7 @@ body {
             rgba(24, 0, 27, 0.68),
             rgba(24, 0, 27, 0.78)
         ),
-
-        url("assets/riju.jpg");
+        url("./assets/riju.jpg");
 
     background-size: cover;
     background-position: center;
