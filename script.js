@@ -255,7 +255,7 @@ dateForm.addEventListener("submit", async function (event) {
                 food: food,
                 date: date,
                 socialLink: socialLink,
-               s opinion: opinion,
+                opinion: opinion,
                 message: message,
                 createdAt: serverTimestamp(),
                 status: "new"
