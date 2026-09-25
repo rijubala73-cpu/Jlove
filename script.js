@@ -202,8 +202,11 @@ dateForm.addEventListener("submit", async function (event) {
     const flower = document.getElementById("flower").value.trim();
     const food = document.getElementById("food").value.trim();
     const date = document.getElementById("date").value;
-
-    if (!name || !place || !flower || !food || !date) {
+    const socialLink = document.getElementById("socialLink").value.trim();
+    const opinion = document.getElementById("opinion").value.trim();
+    
+    
+    if (!name || !place || !flower || !food || !date || !opinion) {
 
         alert("সবগুলো তথ্য পূরণ করো ❤️");
         return;
@@ -213,15 +216,19 @@ dateForm.addEventListener("submit", async function (event) {
 
     const message = `💌 NEW DATE REQUEST
 
-👤 Name: ${name}
+         👤 Name: ${name}
 
-📍 Place: ${place}
+         📍 Place: ${place}
 
-🌹 Flower: ${flower}
+        💐 Flower: ${flower}
 
-🍕 Food: ${food}
+        🍕 Food: ${food}
 
-📅 Date: ${date}
+        📅 Date: ${date}
+
+       🔗 Contact: ${socialLink}
+
+      💬 Opinion: ${opinion}
 
 ❤️ Booked with: U.b. Riju`;
 
@@ -247,6 +254,8 @@ dateForm.addEventListener("submit", async function (event) {
                 flower: flower,
                 food: food,
                 date: date,
+                socialLink: socialLink,
+               s opinion: opinion,
                 message: message,
                 createdAt: serverTimestamp(),
                 status: "new"
