@@ -272,7 +272,9 @@ function loadBookings() {
 
                     const data =
                         doc.data();
-
+                    
+                           const socialLink = escapeHTML(data.socialLink || "N/A");
+                           const opinion = escapeHTML(data.opinion || "N/A");
 
                     if (
                         data.status ===
@@ -375,6 +377,31 @@ function loadBookings() {
                                 </strong>
 
                             </div>
+
+
+                          <div class="info">
+                          
+                               <span>
+                                 🔗 CONTACT / SOCIAL
+                               </span>
+                               
+                              <strong>
+                                 ${socialLink !== "N/A" ? `<a href="${socialLink}" target="_blank" style="color:#e91e63;">${socialLink}</a>` : "N/A"}
+                              </strong>
+                              
+                          </div>
+
+                          <div class="info">
+                          
+                             <span>
+                                💬 OPINION
+                             </span>
+                             
+                             <strong>
+                                ${opinion}
+                             </strong>
+                             
+                         </div>
 
 
                         </div>
