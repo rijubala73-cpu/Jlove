@@ -14,7 +14,10 @@ import {
     collection,
     query,
     orderBy,
-    onSnapshot
+    onSnapshot,
+    doc,
+    deleteDoc,
+    updateDoc
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
 
@@ -268,13 +271,15 @@ function loadBookings() {
 
 
             snapshot.forEach(
-                function (doc) {
+                function (docSnap) {
 
                     const data =
-                        doc.data();
+                        docSnap.data();
                     
-                           const socialLink = escapeHTML(data.socialLink || "N/A");
-                           const opinion = escapeHTML(data.opinion || "N/A");
+                    const docId = docSnap.id;
+                    
+                    const socialLink = escapeHTML(data.socialLink || "N/A");
+                    const opinion = escapeHTML(data.opinion || "N/A");
 
                     if (
                         data.status ===
@@ -294,6 +299,8 @@ function loadBookings() {
 
                     card.className =
                         "booking-card";
+                    
+                    card.setAttribute("data-id", docId);
 
 
                     const createdDate =
@@ -382,7 +389,7 @@ function loadBookings() {
                           <div class="info">
                           
                                <span>
-                                 🔗 CONTACT / SOCIAL
+                                🔗 CONTACT / SOCIAL
                                </span>
                                
                               <strong>
@@ -407,10 +414,13 @@ function loadBookings() {
                         </div>
 
 
-                        <div class="booking-time">
+                        <div class="booking-time" style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
 
-                            Received:
-                            ${createdDate}
+                            <span>Received: ${createdDate}</span>
+
+                            <button class="delete-btn" data-id="${docId}" style="background: #ff4757; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer;">
+                                🗑️ Delete
+                            </button>
 
                         </div>
 
@@ -451,6 +461,62 @@ function loadBookings() {
     );
 
 }
+
+
+// =====================================================
+// CLICK EVENT & DELETE POPUP LOGIC
+// =====================================================
+
+let deleteTargetId = null;
+
+document.addEventListener("click", async (e) => {
+    const card = e.target.closest(".booking-card");
+    const modal = document.getElementById("deleteModal");
+    
+    // 1. Card-e click korle 'NEW' badge chole jabe (Mark as Read)
+    if (card && !e.target.classList.contains("delete-btn")) {
+        const bookingId = card.getAttribute("data-id");
+        
+        try {
+            const docRef = doc(db, "dateBookings", bookingId);
+            await updateDoc(docRef, { status: "seen" });
+        } catch (error) {
+            console.error("Status update error:", error);
+        }
+    }
+
+    // 2. Delete button-e chap dile popup dekhabe
+    if (e.target.classList.contains("delete-btn")) {
+        e.stopPropagation();
+        deleteTargetId = e.target.getAttribute("data-id");
+        if (modal) {
+            modal.style.display = "flex";
+        }
+    }
+});
+
+// 3. Popup-er "Ha, Delete Korun" button-e click logic
+document.addEventListener("click", async (e) => {
+    const modal = document.getElementById("deleteModal");
+    
+    if (e.target && e.target.id === "confirmDeleteBtn") {
+        if (deleteTargetId) {
+            try {
+                await deleteDoc(doc(db, "dateBookings", deleteTargetId));
+                if (modal) modal.style.display = "none";
+                deleteTargetId = null;
+            } catch (error) {
+                console.error("Delete error:", error);
+            }
+        }
+    }
+
+    // 4. "Batil Korun" button-e click logic
+    if (e.target && e.target.id === "cancelDeleteBtn") {
+        if (modal) modal.style.display = "none";
+        deleteTargetId = null;
+    }
+});
 
 
 // =====================================================
