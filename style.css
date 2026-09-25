@@ -711,7 +711,7 @@ button {
 }
 
 
-.input-group input {
+.input-group input, .input-group textarea {
 
     width:
         100%;
@@ -741,7 +741,7 @@ button {
 }
 
 
-.input-group input::placeholder {
+.input-group input::placeholder, .input-group textarea::placeholder {
 
     color:
         rgba(255,255,255,0.5);
@@ -749,7 +749,7 @@ button {
 }
 
 
-.input-group input:focus {
+.input-group input:focus, .input-group textarea:focus {
 
     border-color:
         var(--pink);
